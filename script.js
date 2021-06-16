@@ -2,38 +2,22 @@ let humanScore = 0;
 let computerScore = 0;
 let currentRoundNumber = 1;
 
-
-function generateTarget(){
-  return Math.floor(Math.random()*9);
+const generateTarget = () => {
+  return Math.floor(Math.random() * 10);
 }
 
-function compareGuesses(user,cp,tg){
-  let guessUser = abs(tg-user);
-  let guessCp = abs(tg-cp);
-  if (guessUser === guessCp || guessUser < guessCp){
-    return true;
-  }
-  else{
-    return false;
-  }
+const compareGuesses = (humanGuess, computerGuess, targetGuess) => {
+  const humanDifference = Math.abs(targetGuess - humanGuess)
+  const computerDifference = Math.abs(targetGuess - computerGuess)
+  return humanDifference <= computerDifference;
 }
 
-function updateScore(winner){
-  if(compareGuesses){
+const updateScore = winner => {
+  if (winner === 'human') {
     humanScore++;
-  }
-  else{
+  } else if (winner === 'computer') {
     computerScore++;
   }
 }
 
-function advanceRound(){
-  currentRoundNumber++;
-}
-
-updateScore('human');
-console.log(humanScore); // To confirm that this value increased by 1
-updateScore('computer');
-console.log(computerScore); // To confirm that this value increased by 1
-
-
+const advanceRound = () => currentRoundNumber++;
